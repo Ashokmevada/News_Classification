@@ -20,3 +20,14 @@ class DataIngestionConfig:
     )
 
     data_download_url = DATA_DOWNLOAD_URL
+
+@dataclass
+class DataTranformationConfig:
+    
+    data_transformation_dir: str = DATA_TRANSFORMATION_DIR
+    data_transformation_artifacts_dir : str = os.path.join(ARTIFACT_DIR , data_transformation_dir)
+    tranformed_file_name: str = TRANSFORMED_FILE_NAME
+    data_dir:str = DATA_DIR    
+    drop_columns = DROP_COLUMNS
+    inplace = INPLACE
+    transformed_file_path = os.path.join(data_transformation_artifacts_dir , tranformed_file_name)

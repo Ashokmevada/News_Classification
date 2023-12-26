@@ -13,7 +13,7 @@ class DataIngestion:
         try:
             self.Data_Ingestion_Config = data_Ingestion_Config
         except Exception as e:
-            raise AppException(e)
+            raise AppException(e , sys)
         
 
     def download_data(self) -> str :
@@ -39,7 +39,7 @@ class DataIngestion:
             return zip_file_path
             
         except Exception as e:
-            raise AppException(e)
+            raise AppException(e , sys)
         
     
     def extract_zip_file(self , Zip_file_path : str) -> str:
@@ -58,7 +58,7 @@ class DataIngestion:
 
 
         except Exception as e:
-            raise AppException(e)
+            raise AppException(e , sys)
         
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
 
@@ -78,7 +78,7 @@ class DataIngestion:
 
         except Exception as e:
 
-            raise AppException(e)
+            raise AppException(e , sys)
 
 
 
