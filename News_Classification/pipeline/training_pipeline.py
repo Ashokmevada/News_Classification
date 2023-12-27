@@ -2,10 +2,11 @@ import os
 import sys
 from News_Classification.components.data_ingestion import DataIngestion
 from News_Classification.components.data_transformation import DataTranformation
+from News_Classification.components.model_trainer import ModelTrainer
 from News_Classification.logger import logging
 from News_Classification.exception import AppException
-from News_Classification.entity.config_entity import DataIngestionConfig , DataTranformationConfig
-from News_Classification.entity.artifacts_entity import DataIngestionArtifact , DataTransformationArtifact
+from News_Classification.entity.config_entity import DataIngestionConfig , DataTranformationConfig , ModelTrainingConfig
+from News_Classification.entity.artifacts_entity import DataIngestionArtifact , DataTransformationArtifact , ModelTrainingArtifact
 
 
 class TrainPipeline:
@@ -14,6 +15,7 @@ class TrainPipeline:
 
         self.Data_Ingestion_config = DataIngestionConfig
         self.Data_Transformed_config = DataTranformationConfig
+        self.model_training_config = ModelTrainingConfig
 
 
     def start_data_ingestion(self) -> DataIngestionArtifact :
@@ -60,6 +62,28 @@ class TrainPipeline:
 
         except Exception as e:
             raise AppException(e, sys)
+        
+
+    def start_model_training(self):
+
+        try:
+
+            logging.info("Entered the start_model_training method of TrainPipeline class")
+
+            model_training = ModelTrainer(
+                model_training_config=self.model_training_config,
+                data_transformation_config=self.Data_Transformed_config
+            )
+
+
+            model_training_artifact = model_training.initiate_model_training()
+
+
+            return model_training_artifact
+
+        except Exception as e:
+
+            raise AppException(e , sys)
 
 
         
@@ -68,6 +92,7 @@ class TrainPipeline:
         try:
             data_ingestion_artifacts = self.start_data_ingestion()
             data_transformation_artifacts = self.start_data_transformation(data_ingestion_artifacts=data_ingestion_artifacts)
+            model_training_artifact = self.start_model_training()
 
         except Exception as e:
             raise AppException(e , sys)

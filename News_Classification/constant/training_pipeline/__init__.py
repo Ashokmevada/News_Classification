@@ -16,3 +16,13 @@ DROP_COLUMNS = ['ArticleId']
 
 INPLACE = True
 
+MODEL_DIR = "trained_Model"
+
+VOC_SIZE = 5000
+
+EMBEDDED_VECTOR_FEATURES = 40
+
+MODEL_NAME = 'best_model.h5'
+
+
+

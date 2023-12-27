@@ -10,3 +10,7 @@ class DataIngestionArtifact:
 class DataTransformationArtifact:
     transformed_data_path : str
 
+@dataclass
+class ModelTrainingArtifact:
+    model_file_path : str
+

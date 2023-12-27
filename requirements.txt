@@ -2,3 +2,18 @@ setuptools
 pandas
 numpy
 nltk
+keras
+scikit-learn
+gdown
+matplotlib
+ipykernel
+spicy
+scikit-learn
+flask-cors
+flask
+requests
+tensorflow 
+from-root
+Gunicorn
+-e .
+

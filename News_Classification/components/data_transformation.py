@@ -29,27 +29,7 @@ class DataTranformation:
         except Exception as e:
             raise AppException(e , sys)
         
-    def clean_text(self , text):
-
-        sentences = nltk.sent_tokenize(text)
-        corpus = []
-        stemmer = PorterStemmer()
-        full_corpus = []
-
-        for i in range(len(sentences)):
-
-            review = re.sub('[^a-zA-Z]' , ' ' , sentences[i])
-            review = review.lower()
-            review = review.split()
-            review = [stemmer.stem(i) for i in review if not i in set(stopwords.words('english'))]
-            review = ' '.join(review)
-            corpus.append(review)
-
-            full_corpus.append('.'.join(corpus))
-
-        ans = '.'.join(corpus)
-
-        return ans
+ 
 
     def initiate_data_transformation(self) -> DataTransformationArtifact:
 
@@ -58,7 +38,6 @@ class DataTranformation:
             df = pd.read_csv(os.path.join(self.data_ingestion_artifact.feature_store_path , "learn-ai-bbc" , "train.csv"))
             df.drop(self.data_transformation_config.drop_columns , axis =1 , inplace=self.data_transformation_config.inplace)
             df.drop_duplicates(inplace=self.data_transformation_config.inplace)
-            df['Text'] = df['Text'].apply(self.clean_text)
             encoder = LabelEncoder()
             df['Category'] = encoder.fit_transform(df['Category'])
 
