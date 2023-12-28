@@ -22,8 +22,14 @@ max_sentence_length : int = 10030
 
 
 
-# obj = TrainPipeline()
-# obj.run_pipeline()
+
+
+@app.route('/train')
+def train():
+
+    obj = TrainPipeline()
+    result = obj.run_pipeline()
+    return render_template('train.html' , result =  result)
 
 
 @app.route('/')
@@ -71,5 +77,5 @@ def submit():
     
 
 if __name__ == '__main__':    
-    
+
     app.run(host="0.0.0.0", port=8080)

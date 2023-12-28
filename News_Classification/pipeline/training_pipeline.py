@@ -94,5 +94,7 @@ class TrainPipeline:
             data_transformation_artifacts = self.start_data_transformation(data_ingestion_artifacts=data_ingestion_artifacts)
             model_training_artifact = self.start_model_training()
 
+            return "Training Completed"
+
         except Exception as e:
             raise AppException(e , sys)
