@@ -41,11 +41,13 @@ def index():
 def submit():
 
     try:
-
+        print('try:')
         user_input = request.form['user_input']
+        print(user_input)
         logging.info(user_input)
         onehot_list = []
         onehot_repr = list(one_hot(user_input , VOC_SIZE))
+        print(onehot_repr)
         onehot_list.append(onehot_repr)
         logging.info("onehot encoding success")
         embedded_doc = pad_sequences(onehot_list , padding='pre' , maxlen=max_sentence_length)
@@ -55,9 +57,11 @@ def submit():
         logging.info(model_path)     
 
 
-        with open(model_path , 'rb') as file:
+        with open(r"G:\DATASCIENCE\End_to_End_Project\News_Classification\artifacts\trained_Model\best_model.h5", 'rb') as file:
             model = pickle.load(file)
+
         logging.info("Model load Successfull")
+
         with open(os.path.join(ARTIFACT_DIR , 'encoder.pkl') , 'rb') as f:
             encoder = pickle.load(f)
 
