@@ -57,7 +57,8 @@ def submit():
         logging.info(model_path)     
 
 
-        with open(r"G:\DATASCIENCE\End_to_End_Project\News_Classification\artifacts\trained_Model\best_model.h5", 'rb') as file:
+
+        with open(model_path, 'rb') as file:
             model = pickle.load(file)
 
         logging.info("Model load Successfull")
