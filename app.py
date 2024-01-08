@@ -62,6 +62,7 @@ def submit():
             model = pickle.load(file)
 
         logging.info("Model load Successfull")
+        print("Model load Successfull")
 
         with open(os.path.join(ARTIFACT_DIR , 'encoder.pkl') , 'rb') as f:
             encoder = pickle.load(f)
